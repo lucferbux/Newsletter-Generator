@@ -66,28 +66,28 @@ This project generates HTML email newsletters from markdown content for the Red 
 ---
 
 ### `/tech-releases`
-**Purpose:** Generate a newsletter focused on technical features, release details, and implementation specifics.
+**Purpose:** Generate a newsletter highlighting new features, improvements, and what's changed in the product release.
 
-**Target Audience:** Engineers, developers, technical leads, DevOps teams
+**Target Audience:** Product users, engineers, developers, technical leads, DevOps teams
 
 **Content Focus:**
-- New feature releases
-- Technical specifications
-- Architecture changes
-- API updates
-- Performance improvements
-- Bug fixes and enhancements
-- Migration guides
-- Code examples
+- New features and capabilities (what users can do now)
+- User-facing improvements and enhancements
+- UI/UX changes and new workflows
+- Performance improvements (user impact)
+- Key highlights with screenshots/visuals
+- Getting started with new features
+- Practical examples and use cases
 
-**Tone:** Technical, detailed, implementation-focused
+**Tone:** Informative, enthusiastic, user-focused (not deeply technical)
 
 **Example Structure:**
-- Release version and date
-- Feature breakdown with technical details
-- Code snippets or configuration examples
-- Known issues and workarounds
-- Next steps for adoption
+- "What's New" overview
+- Feature highlights with descriptions
+- Screenshots or visual examples
+- How users benefit from changes
+- Quick start or "try it now" sections
+- No deep code examples or architecture details
 
 ---
 
@@ -112,13 +112,15 @@ When a user requests newsletter generation, follow these steps:
 - Keep jargon minimal, explain acronyms
 
 **For `/tech-releases`:**
-- Preserve technical accuracy and detail
-- Include version numbers, dates, and specifics
-- Organize by feature or component
-- Add implementation notes
-- Include code examples if relevant
-- Link to documentation or PRs
-- List breaking changes prominently
+- Focus on what's new and what users can do
+- Highlight user-facing features and improvements
+- Use clear, accessible language (avoid deep technical jargon)
+- Include screenshots or visual descriptions
+- Organize by feature area
+- Show practical use cases and benefits
+- Keep it exciting and engaging (changelog style)
+- Link to documentation for "learn more"
+- No code snippets unless absolutely necessary for clarity
 
 ### Step 3: Generate Gmail-Compatible HTML Newsletter
 
@@ -251,18 +253,21 @@ Output: newsletters/rhoai-2.35-business.html
 Focus on the modular architecture benefits for business efficiency.
 ```
 
-**Technical Newsletter:**
+**Feature Highlights Newsletter:**
 ```
 /tech-releases
 
-Create a technical release newsletter for RHOAI 3.0.
-Source: markdown/rhoai-3.0-features.md
-Output: newsletters/rhoai-3.0-technical.html
+Create a "What's New" feature highlights newsletter for RHOAI 3.0.
+Source: markdown/rhoai-3.0-sprint-demo.md
+Output: newsletters/rhoai-3.0-features.html
 
-Include all new Gen AI features and API changes.
+Focus on:
+- New user-facing features and capabilities
+- UI improvements and new workflows
+- What users can do now that they couldn't before
+- Include visual descriptions for screenshots
+- Keep it exciting and accessible (changelog style)
 ```
-
----
 
 ## Best Practices
 
@@ -380,7 +385,11 @@ After generating the newsletter, remind the user:
 
 ## Support
 
-For questions or issues:
+**Example Files:**
+- `markdown/example-business-newsletter.md` - Business/management focused newsletter example
+- `markdown/example-feature-newsletter.md` - Feature highlights/changelog newsletter example
+
+**For questions or issues:**
 - Check `docs/usage-guide.md` for detailed instructions
 - Review `CONTRIBUTING.md` for contribution guidelines
 - Contact: Dashboard Platform Team
