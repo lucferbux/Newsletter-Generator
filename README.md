@@ -1,27 +1,26 @@
-# RHOAI Newsletter Generator 📧
+# RHOAI Newsletter Generator
 
 > **AI-powered HTML email newsletter generator for the Red Hat OpenShift AI (RHOAI) Dashboard team**
 
-Transform markdown content into beautiful, Gmail-compatible HTML newsletters with AI assistance. Generate two types of newsletters: business-focused achievements for management or technical release notes for engineering teams.
+Transform release notes into beautiful, Gmail-compatible HTML newsletters with AI assistance. Uses a two-step workflow to expand brief release notes into polished newsletters.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🤖 **AI-Powered Content Transformation** - Automatically summarizes and adapts markdown content for your target audience
-- 📧 **Gmail-Compatible HTML** - Pre-tested templates that work perfectly in Gmail and other email clients
-- 🎨 **Professional Design** - Clean, responsive templates with consistent RHOAI branding
-- 📝 **Markdown-Based** - Write content in simple markdown, get polished HTML newsletters
-- 🔄 **Dual Newsletter Types** - Business achievements or technical releases
-- 🖼️ **Image Support** - Integrated with imgur.com for reliable image hosting
+- **Two-Step Workflow** - Write brief release notes, AI expands and generates HTML
+- **Gmail-Compatible HTML** - Pre-tested templates that work perfectly in Gmail
+- **Two Content Types** - UI Features (with screenshots) and Platform Improvements (metrics-based)
+- **Professional Design** - Clean, responsive templates with consistent RHOAI branding
+- **Markdown-Based** - Write content in simple markdown, get polished HTML newsletters
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
-- GitHub Copilot Chat, Claude, or similar AI assistant
+- Claude Code, GitHub Copilot Chat, or similar AI assistant
 - Modern web browser
 - Gmail account (for sending)
 - VS Code or Cursor editor (recommended for Live Server preview)
@@ -37,89 +36,132 @@ cd Newsletter
 2. Verify the folder structure:
 ```
 Newsletter/
-├── .github/
-│   └── copilot-instructions.md    # AI rules and actions
+├── AGENTS.md                    # AI agent instructions
+├── CLAUDE.md                    # Claude Code instructions
 ├── templates/
-│   └── rhoai-template.html        # HTML template with placeholders
+│   └── rhoai-template.html      # HTML template with placeholders
+├── release-notes/
+│   └── example-release-notes.md # Brief release notes (input)
 ├── markdown/
-│   └── (your content here)        # Source markdown files
+│   └── example-feature-newsletter.md # Full markdown (source)
 ├── newsletters/
-│   └── (generated output here)    # Generated HTML newsletters
+│   └── (generated output here)  # Generated HTML newsletters
 ├── docs/
-│   ├── usage-guide.md             # Detailed usage instructions
-│   └── gmail-guide.md             # Gmail sending guide
+│   ├── usage-guide.md           # Detailed usage instructions
+│   └── gmail-guide.md           # Gmail sending guide
 ├── README.md
 └── CONTRIBUTING.md
 ```
 
 ---
 
-## 📖 Usage
+## Usage
 
-### Basic Workflow
+### Workflow Overview
 
-1. **Create Content** - Write your newsletter content in markdown format and save it to the `markdown/` folder
+The newsletter generation follows a two-step workflow:
 
-2. **Generate Newsletter** - Open your AI assistant (GitHub Copilot Chat or Claude) and use one of the actions:
+```
+release-notes/*.md → /expand-release-notes → markdown/*.md → /tech-releases → newsletters/*.html
+```
 
-   **For Business Audiences:**
-   ```
-   /business-achievements
-   
-   Generate a newsletter about RHOAI 2.35 release
-   Source: markdown/rhoai-2.35-release.md
-   Output: newsletters/rhoai-2.35-business.html
-   ```
+### Step 1: Write Brief Release Notes
 
-   **For Technical Audiences:**
-   ```
-   /tech-releases
-   
-   Create technical release notes for RHOAI 3.0
-   Source: markdown/rhoai-3.0-features.md
-   Output: newsletters/rhoai-3.0-tech.html
-   ```
+Create concise release notes in `release-notes/` folder:
 
-3. **Preview** - Open the generated HTML file:
-   - Use VS Code Live Server extension
-   - Or simply open in your browser
-   - Verify images load correctly
+```markdown
+# RHOAI 2.36 Sprint Release Notes
 
-4. **Send via Gmail** - See [Gmail Guide](docs/gmail-guide.md) for detailed instructions
+**Sprint:** December 2025
+**Version:** 2.36.0
+
+## UI Features
+
+### Model Comparison View
+Compare multiple models side-by-side.
+
+**Screenshot:** https://i.imgur.com/EXAMPLE.png
+
+- Compare up to 4 models
+- Export as PDF
+
+## Platform Improvements
+
+### API Optimization
+- Dashboard load: 2.1s → 0.8s (62% faster)
+```
+
+### Step 2: Expand to Full Markdown
+
+Use AI to expand brief notes into full newsletter content:
+
+```
+/expand-release-notes
+
+Source: release-notes/rhoai-2.36-sprint.md
+Output: markdown/rhoai-2.36-features.md
+```
+
+### Step 3: Generate HTML Newsletter
+
+Generate Gmail-compatible HTML:
+
+```
+/tech-releases
+
+Source: markdown/rhoai-2.36-features.md
+Output: newsletters/rhoai-2.36-features.html
+```
+
+### Step 4: Preview and Send
+
+1. Open the HTML file in your browser
+2. Select all (Cmd+A / Ctrl+A)
+3. Copy (Cmd+C / Ctrl+C)
+4. Paste in Gmail compose
+5. Send!
 
 ---
 
-## 📚 Newsletter Types
+## Content Types
 
-### `/business-achievements`
-**Target:** Management, executives, business units, product owners
+### UI Features (with screenshots)
 
-**Focus:**
-- Business impact and ROI
-- Strategic advantages
-- Market positioning
-- Team collaboration benefits
-- High-level technical achievements framed as business wins
+For features with visible UI changes:
+- Include screenshot URL (imgur.com)
+- "What You Can Do" section with checkmarks
+- "How to Use It" with numbered steps
+- "Perfect For" with use cases
 
-**Tone:** Professional, strategic, results-oriented
+### Platform Improvements (metrics-based)
+
+For backend improvements and performance gains:
+- No screenshot required
+- Before/After metrics tables
+- Percentage improvements
+- Light green background in HTML (#e8f5e9)
+
+---
+
+## Available Commands
+
+### `/expand-release-notes`
+**Purpose:** Transform brief release notes into full newsletter-ready markdown
+
+**Input:** Brief release notes from `release-notes/` folder
+**Output:** Full markdown file in `markdown/` folder
 
 ---
 
 ### `/tech-releases`
-**Target:** Engineers, developers, technical leads, DevOps teams
+**Purpose:** Generate Gmail-compatible HTML newsletter
 
-**Focus:**
-- New feature releases
-- Technical specifications
-- Architecture changes
-- API updates and breaking changes
-- Code examples and migration guides
-
-**Tone:** Technical, detailed, implementation-focused
+**Input:** Full markdown from `markdown/` folder
+**Output:** HTML newsletter in `newsletters/` folder
 
 ---
 
-## 🎨 Template Customization
+## Template Customization
 
 The default template (`templates/rhoai-template.html`) uses these placeholders:
 
@@ -134,69 +176,68 @@ The default template (`templates/rhoai-template.html`) uses these placeholders:
 - **Content background:** `#ffffff` (white)
 - **Primary text:** `#1f1f1f` (dark grey)
 - **Headings:** `#2c3e50` (elegant dark grey-blue)
-- **Secondary text:** `#444746` (medium grey)
+- **Platform improvements:** `#e8f5e9` (light green)
 
 ---
 
-## 🖼️ Image Guidelines
+## Image Guidelines
 
-**✅ Recommended:**
+**Recommended:**
 - Host on **imgur.com** (most reliable for email)
 - Use HTTPS URLs only
 - Keep file size < 300KB
 - Recommended dimensions: 540x300px (16:9 ratio)
-- Use descriptive alt text
 
-**❌ Avoid:**
+**Avoid:**
 - Local file paths
 - Google Drive links (unreliable in email)
 - HTTP (non-secure) URLs
-- Images larger than 500KB
-
-### Uploading to Imgur
-
-1. Go to https://imgur.com
-2. Click "New post"
-3. Upload your image
-4. Right-click the uploaded image → "Copy image address"
-5. Use that URL in your newsletter
 
 ---
 
-## 📋 Examples
+## Examples
 
-### Example 1: Business Newsletter
-```
-/business-achievements
+### Brief Release Notes → Full Newsletter
 
-Generate a newsletter highlighting modular architecture benefits.
-Source: markdown/modular-arch-intro.md
-Template: templates/rhoai-template.html
-Output: newsletters/modular-arch-business.html
+**Input (release-notes/example.md):**
+```markdown
+### Model Comparison
+Compare models side-by-side.
 
-Focus on:
-- 70% reduction in development effort
-- Dual platform impact (Kubeflow + RHOAI)
-- Faster feature delivery
+**Screenshot:** https://i.imgur.com/ABC123.png
+
+- Compare 4 models
+- Export PDF
 ```
 
-### Example 2: Technical Release
-```
-/tech-releases
+**Output (markdown/example.md):**
+```markdown
+## Model Comparison View
 
-Create release notes for RHOAI 2.35
-Source: markdown/rhoai-2.35-technical.md
-Output: newsletters/rhoai-2.35-release.html
+**Compare models side-by-side to make better decisions**
 
-Include:
-- Model Registry new features
-- Model Catalog implementation details
-- Breaking changes and migration steps
+### What You Can Do
+
+- Compare Multiple Models - View up to 4 models side-by-side
+- Export Results - Download comparisons as PDF
+
+### How to Use It
+
+1. Open Model Catalog
+2. Select models to compare
+3. Click "Compare"
+
+### Perfect For
+
+- Choosing models for production
+- Evaluating upgrades
+
+![Model comparison](https://i.imgur.com/ABC123.png)
 ```
 
 ---
 
-## 🔍 Preview Options
+## Preview Options
 
 ### VS Code / Cursor
 
@@ -207,14 +248,11 @@ Install **Live Server** extension:
 
 ### Browser Preview
 
-Simply open the HTML file in any modern browser:
-- **Chrome/Edge:** Drag and drop the file
-- **Firefox:** File → Open File
-- **Safari:** File → Open File
+Simply open the HTML file in any modern browser.
 
 ---
 
-## 📤 Sending via Gmail
+## Sending via Gmail
 
 **Quick Method:**
 1. Open the HTML file in your browser
@@ -228,17 +266,13 @@ For detailed instructions, see [Gmail Guide](docs/gmail-guide.md)
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-- Reporting bugs
-- Suggesting features
-- Submitting pull requests
-- Code style and standards
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-## 📞 Support
+## Support
 
 - **Documentation:** [Usage Guide](docs/usage-guide.md) | [Gmail Guide](docs/gmail-guide.md)
 - **Issues:** [GitHub Issues](https://github.com/your-org/Newsletter/issues)
@@ -246,28 +280,20 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ---
 
-## 📜 License
+## License
 
-Copyright © 2025 Red Hat, Inc.
-
----
-
-## 🔗 Related Resources
-
-- [RHOAI Documentation](https://access.redhat.com/documentation/en-us/red_hat_openshift_ai)
-- [Kubeflow Project](https://www.kubeflow.org/)
-- [Gmail HTML Email Best Practices](https://developers.google.com/gmail/design/css)
+Copyright 2025 Red Hat, Inc.
 
 ---
 
-## ⭐ Quick Tips
+## Quick Tips
 
-1. **Test emails** - Always send a test to yourself first
-2. **Mobile check** - View on both desktop and mobile Gmail
-3. **Image hosting** - Use imgur.com for best results
-4. **Keep it concise** - Aim for 3-5 main sections per newsletter
+1. **Start with brief notes** - Let AI do the expansion
+2. **Use two content types** - UI features with screenshots, platform improvements with metrics
+3. **Test emails** - Always send a test to yourself first
+4. **Image hosting** - Use imgur.com for best results
 5. **Preview first** - Use Live Server to verify formatting before sending
 
 ---
 
-Made with ❤️ by the RHOAI Dashboard Platform Team
+Made with love by the RHOAI Dashboard Platform Team
